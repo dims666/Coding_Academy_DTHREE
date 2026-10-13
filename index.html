@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coding Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="#galeri">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span class="brand-name">Coding Academy</span>
+    </a>
+    <nav class="nav" aria-label="Menu utama">
+      <a href="#galeri" data-view="galeri" class="nav-link">Galeri</a>
+      <a href="#daftar" data-view="daftar" class="nav-link">Pendaftaran</a>
+      <a href="#peserta" data-view="peserta" class="nav-link">Peserta <span class="count" id="navCount">0</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== 1. GALERI ===================== -->
+    <section id="view-galeri" class="view" aria-labelledby="judul-galeri">
+      <div class="hero">
+        <div class="hero-text">
+          <h1 id="judul-galeri">Ngoding itu dipelajari, bukan ditakuti.</h1>
+          <p>Kelas kecil, praktik langsung, dan mentor yang sabar. Mulai dari nol, pulang membawa proyek pertama Anda.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#daftar">Daftar sekarang</a>
+            <a class="btn btn-light" href="#peserta">Lihat peserta</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="term">
+            <div class="term-bar"><span></span><span></span><span></span><b>terminal</b></div>
+            <pre><code>$ mulai belajar
+&gt; kelas dipilih: <em>JavaScript</em>
+&gt; mentor: siap
+&gt; proyek pertama: <em>selesai!</em>
+$ <i class="cursor"></i></code></pre>
+          </div>
+          <span class="sticker s1">Python</span>
+          <span class="sticker s2">JavaScript</span>
+          <span class="sticker s3">PHP</span>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h2>Kegiatan pelatihan</h2>
+        <p>Klik kartu untuk melihat foto dan deskripsi lengkapnya.</p>
+      </div>
+
+      <div class="chips" id="chips" role="group" aria-label="Filter kategori"></div>
+      <div id="galleryGrid" class="gallery"></div>
+    </section>
+
+    <!-- ===================== 2. PENDAFTARAN ===================== -->
+    <section id="view-daftar" class="view" hidden aria-labelledby="judul-daftar">
+      <div class="section-head">
+        <h1 id="judul-daftar">Pendaftaran peserta</h1>
+        <p>Isi semua kolom, lalu simpan. Anda akan diminta konfirmasi sebelum data tersimpan.</p>
+      </div>
+
+      <div class="daftar-layout">
+        <form id="formDaftar" class="box form" novalidate>
+          <div class="field">
+            <label for="nik">NIK</label>
+            <input type="text" id="nik" inputmode="numeric" maxlength="16" placeholder="16 digit angka" autocomplete="off">
+            <small class="error" id="err-nik"></small>
+          </div>
+
+          <div class="field">
+            <label for="nama">Nama lengkap</label>
+            <input type="text" id="nama" placeholder="Sesuai KTP" autocomplete="name">
+            <small class="error" id="err-nama"></small>
+          </div>
+
+          <fieldset class="field">
+            <legend>Jenis kelamin</legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="gender" value="Laki-laki"><span>Laki-laki</span></label>
+              <label class="choice"><input type="radio" name="gender" value="Perempuan"><span>Perempuan</span></label>
+            </div>
+            <small class="error" id="err-gender"></small>
+          </fieldset>
+
+          <div class="field">
+            <label for="hp">No. HP</label>
+            <input type="tel" id="hp" inputmode="tel" placeholder="081234567890" autocomplete="tel">
+            <small class="error" id="err-hp"></small>
+          </div>
+
+          <div class="field">
+            <label for="alamat">Alamat</label>
+            <textarea id="alamat" rows="3" placeholder="Jalan, nomor, kelurahan, kota" autocomplete="street-address"></textarea>
+            <small class="error" id="err-alamat"></small>
+          </div>
+
+          <fieldset class="field">
+            <legend>Bahasa pemrograman yang diminati</legend>
+            <div class="choice-row" id="bahasaOptions"></div>
+            <small class="error" id="err-bahasa"></small>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Simpan pendaftaran</button>
+            <button type="reset" class="btn btn-light">Kosongkan form</button>
+          </div>
+        </form>
+
+        <aside class="side">
+          <div id="hasilKosong" class="box note">
+            <h2>Hasil pendaftaran</h2>
+            <p>Setelah Anda menekan “Ya” pada dialog konfirmasi, data yang tersimpan tampil di sini.</p>
+          </div>
+
+          <div id="hasil" class="box hasil" hidden aria-live="polite">
+            <h2>Data berhasil disimpan</h2>
+            <dl id="hasilList"></dl>
+            <a class="btn btn-dark" href="#peserta">Lihat daftar peserta</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== 3. PESERTA ===================== -->
+    <section id="view-peserta" class="view" hidden aria-labelledby="judul-peserta">
+      <div class="section-head">
+        <h1 id="judul-peserta">Daftar peserta terdaftar</h1>
+        <p>Data tersimpan di browser perangkat ini (localStorage).</p>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <div class="box bars" id="barsBox" hidden>
+        <h2>Peminat per bahasa pemrograman</h2>
+        <div id="bars"></div>
+      </div>
+
+      <div class="toolbar">
+        <input type="search" id="cari" placeholder="Cari nama, NIK, no. HP, atau alamat" aria-label="Cari peserta">
+        <select id="filterBahasa" aria-label="Filter bahasa"></select>
+        <button type="button" class="btn btn-primary" id="btnCsv">Ekspor CSV</button>
+        <button type="button" class="btn btn-light" id="btnHapusSemua">Hapus semua</button>
+      </div>
+
+      <div class="box table-box">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th><th>Nama lengkap</th><th>NIK</th><th>Jenis kelamin</th>
+                <th>No. HP</th><th>Alamat</th><th>Bahasa</th><th>Tanggal daftar</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <div id="kosong" class="kosong" hidden>
+          <p id="kosongTeks">Belum ada peserta terdaftar.</p>
+          <div class="kosong-aksi">
+            <a class="btn btn-primary" href="#daftar">Daftarkan peserta</a>
+            <button type="button" class="btn btn-light" id="btnContoh">Isi data contoh</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Coding Academy &middot; Data peserta tersimpan di browser perangkat ini, bukan di server.</p>
+  </footer>
+
+  <!-- Dialog konfirmasi (dipakai untuk simpan dan hapus) -->
+  <dialog id="dlgConfirm" class="dlg">
+    <h3 id="confirmJudul">Konfirmasi</h3>
+    <p id="confirmTeks">Apakah Anda sudah yakin untuk menyimpan?</p>
+    <div class="dlg-actions">
+      <button type="button" class="btn btn-light" id="btnTidak">Tidak</button>
+      <button type="button" class="btn btn-primary" id="btnYa">Ya</button>
+    </div>
+  </dialog>
+
+  <!-- Dialog foto galeri -->
+  <dialog id="dlgFoto" class="dlg dlg-foto">
+    <img id="fotoBesar" alt="">
+    <div class="dlg-foto-body">
+      <span class="tag" id="fotoTag"></span>
+      <h3 id="fotoJudul"></h3>
+      <p class="foto-meta" id="fotoMeta"></p>
+      <p id="fotoDesc"></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn btn-dark" id="btnTutupFoto">Tutup</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
