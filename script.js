@@ -2,7 +2,7 @@
    Coding Academy v2 - script.js
    ===================================================== */
 
-const BAHASA = ["JavaScript", "Python", "PHP", "Java", "C#", "Dart (Flutter)", "Go"];
+const BAHASA = ["HTML & CSS", "JavaScript", "Python", "PHP", "Java", "C#", "Dart (Flutter)", "Go"];
 
 /* ---------- Data galeri ----------
    Taruh foto asli di folder "images/" sesuai nama di properti "foto".
